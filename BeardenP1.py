@@ -1,11 +1,3 @@
-# status = [3, 3, 1]
-# operation = [0, 1, 1]
-# newstat = status
-# for i in range(0, 3):
-#     newstat[i] = newstat[i] - operation[i]
-# print(newstat)
-# operations = [[0, 1, 1], [1, 0, 1], [1, 1, 1], [2, 0, 1], [0, 2, 1]]
-
 
 def performop(state, op):
     newstate = list.copy(state)
@@ -49,12 +41,9 @@ def search(node, depth, goal, ops, startstate):
         return []
     elif depth > 0:
         transitions, valops = gensuccessors(ops, node, startstate)
-        # print("Transitions: ", str(transitions), "for node: ", str(node))
         for state in transitions:
-            # print("State is: ", str(state), "in transitions: ", str(transitions))
             result = search(state, depth-1, goal, ops, startstate)
             if result is not None:
-                # print("Result is :", str(result), "Operation is: ", str(valops[transitions.index(state)]))
                 result.append(valops[transitions.index(state)])
                 return result
         return None
@@ -68,12 +57,12 @@ def search(node, depth, goal, ops, startstate):
 startstate = [3, 3, 1]
 goalstate = [0, 0, 0]
 operations = [[0, 1, 1], [1, 0, 1], [1, 1, 1], [2, 0, 1], [0, 2, 1]]
-maxdepth = 11
+maxdepth = 20
 found = False
 
 
 for i in range(0, maxdepth):
-    result = search(startstate, maxdepth, goalstate, operations, startstate)
+    result = search(startstate, i, goalstate, operations, startstate)
     if result is not None:
         result.reverse()
         print(result)
