@@ -57,9 +57,15 @@ def search(node, depth, goal, ops, startstate):
 startstate = [3, 3, 1]
 goalstate = [0, 0, 0]
 operations = [[0, 1, 1], [1, 0, 1], [1, 1, 1], [2, 0, 1], [0, 2, 1]]
-maxdepth = 20
 found = False
+maxdepth = ''
 
+while not maxdepth.isdigit():
+    maxdepth = input("Please enter the maximum depth to search to: ")
+    if not maxdepth.isdigit():
+        print("Error! Integer required.")
+
+maxdepth = int(maxdepth)
 
 for i in range(0, maxdepth):
     result = search(startstate, i, goalstate, operations, startstate)
