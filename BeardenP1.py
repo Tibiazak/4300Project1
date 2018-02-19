@@ -21,11 +21,11 @@ def isvalid(state, startstate):
     otherside = startstate.copy()
     for i in range(0, 3):
         otherside[i] = startstate[i] - state[i]
-    if state[1] > state[0]:
+    if (state[1] > state[0]) and state[0] != 0:
         return False
     elif state[0] > 3 or state[1] > 3 or state[2] > 1:
         return False
-    elif otherside[1] > otherside[0]:
+    elif (otherside[1] > otherside[0]) and otherside[0] != 0:
         return False
     elif otherside[0] > 3 or otherside[1] > 3 or otherside[2] > 1:
         return False
@@ -51,6 +51,7 @@ def search(node, depth, goal, ops, startstate):
         transitions, valops = gensuccessors(ops, node, startstate)
         # print("Transitions: ", str(transitions), "for node: ", str(node))
         for state in transitions:
+            # print("State is: ", str(state), "in transitions: ", str(transitions))
             result = search(state, depth-1, goal, ops, startstate)
             if result is not None:
                 # print("Result is :", str(result), "Operation is: ", str(valops[transitions.index(state)]))
@@ -69,16 +70,7 @@ goalstate = [0, 0, 0]
 operations = [[0, 1, 1], [1, 0, 1], [1, 1, 1], [2, 0, 1], [0, 2, 1]]
 maxdepth = 11
 found = False
-# frontier, validops = gensuccessors(operations, startstate)
-# print(frontier)
-# print(validops)
-# for state in frontier:
-#     if state == goalstate:
-#         print("Found solution with operation: ")
-#         print(validops[frontier.index(state)])
-#         break
-#     else:
-#         print("No solution found.")
+
 
 for i in range(0, maxdepth):
     result = search(startstate, maxdepth, goalstate, operations, startstate)
