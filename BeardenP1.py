@@ -51,6 +51,21 @@ def search(node, depth, goal, ops, startstate):
         return None
 
 
+def showresult(start, ops):
+    print("Solution found at depth " + str(len(ops)) + "!")
+    print("S0: " + str(start))
+    state = start.copy()
+    for i in range(0, len(ops)):
+        for j in range(0, 3):
+            if state[2] is 1:
+                state[j] -= ops[i][j]
+            else:
+                state[j] += ops[i][j]
+        print("S" + str(i+1) + ": " + str(state))
+    return
+
+
+
 # Initiate variables - startstate is 3 missionaries, 3 cannibals, and a boat
 # goalstate is 0 missionaries, 0 cannibals, no boat
 
@@ -71,7 +86,7 @@ for i in range(0, maxdepth):
     result = search(startstate, i, goalstate, operations, startstate)
     if result is not None:
         result.reverse()
-        print(result)
+        showresult(startstate, result)
         found = True
         break
 if not found:
