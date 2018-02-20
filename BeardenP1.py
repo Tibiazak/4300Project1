@@ -1,6 +1,7 @@
 # Joshua Bearden
 # CS4300 Project 1
 # 2/19/18
+# Written in Python 3.6.4
 #
 # A program to solve the missionaries and cannibals problem using iterative deepening search
 #
